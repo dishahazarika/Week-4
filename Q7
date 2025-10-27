@@ -1,0 +1,26 @@
+//7. Write a program to read multiple lines of text and then count the number of characters, words, and lines in the text.
+#include <stdio.h>
+
+int main() {
+    char text[500];
+    int characters = 0, words = 0, lines = 0;
+    int i = 0;
+
+    printf("Enter text (press Enter twice to stop):\n");
+
+    while (fgets(text, sizeof(text), stdin)) {
+        if (text[0] == '\n') break; // stop if empty line
+        lines++;
+
+        for (i = 0; text[i] != '\0'; i++) {
+            if (text[i] != ' ' && text[i] != '\n')
+                characters++;
+            if ((text[i] == ' ' && text[i + 1] != ' ' && text[i + 1] != '\n') || 
+                (text[i] != ' ' && text[i + 1] == '\n'))
+                words++;
+        }
+    }
+
+    printf("\nCharacters: %d\nWords: %d\nLines: %d\n", characters, words, lines);
+    return 0;
+}
